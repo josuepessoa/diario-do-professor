@@ -1,0 +1,23 @@
+<div class="po-menu-overlay" style="z-index: 9;" (click)="onClickOut()" *ngIf="!hidden" @fade></div>
+
+<div class="page-slide-container" *ngIf="!hidden" @slide>  
+  
+  <div class="po-page-slide-header">
+    <div class="po-page-slide-title">
+      <div class="page-slide-text-header">{{ title }}</div>
+      <div class="po-page-slide-subtitle page-slide-text-header" *ngIf="subtitle">{{ subtitle }}</div>
+    </div>
+    <button class="page-slide-close-button" *ngIf="!hideClose" (click)="close()">
+      <span class="po-icon po-icon-close"></span>
+    </button>
+  </div>
+
+  <div class="po-page-slide-body">
+    <ng-content></ng-content>
+  </div>
+
+</div>
+
+
+
+

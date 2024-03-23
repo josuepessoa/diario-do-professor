@@ -1,0 +1,136 @@
+<po-page-default p-title="Detalhes das turmas">
+  <div class="po-row po-mt-1 po-mb-1">
+    <po-button
+      class="po-mt-1 po-sm-12 po-md-6"
+      p-label="Incluir Turma"
+      p-kind="primary"
+      p-icon="po-icon po-icon-plus"
+      (p-click)="incluiTurma()">
+    </po-button>
+    <po-input
+      class="po-sm-12 po-md-6"
+      name="search-turma"
+      p-icon="po-icon-search"
+      p-placeholder="Pesquise pelo nome da Turma"
+      p-clean="true"
+      [formControl]="searchTurmaFormControl">
+    </po-input>
+  </div>
+  <ng-container *ngIf="turmas && turmas.length === 0">
+    <span class="po-font-text-bold po-text-center po-sm-12 po-mt-2 po-mb-2">Nenhum dado encontrado</span>
+  </ng-container>
+  <div *ngFor="let turma of turmas;">
+    <po-widget
+      class="po-pt-1 po-pb-1 po-md-12"
+      p-primary-label="Alterar"
+      [p-title]="turma.descricao"
+      (p-primary-action)="modificarTurma(turma)">
+      <div class="po-row">
+        <po-info
+          class="po-mb-1 po-sm-6 po-md-3"
+          p-label="Ano"
+          [p-value]="turma.ano">
+        </po-info>
+        <po-info
+          class="po-mb-1 po-sm-6 po-md-3"
+          p-label="Data de Criação"
+          [p-value]="turma.dataCriacao">
+        </po-info>
+        <po-info
+          class="po-mb-1 po-sm-6 po-md-3"
+          p-label="Faixa Etária"
+          [p-value]="turma.idadeInicial.toString() + ' - ' + turma.idadeFinal.toString()">
+        </po-info>
+        <po-tag
+          class="po-mb-1 po-sm-6 po-md-3"
+          p-label="Período"
+          [p-value]="getPeriodos(turma.periodo).label"
+          [p-color]="getPeriodos(turma.periodo).color">
+        </po-tag>
+      </div>
+    </po-widget>
+  </div>
+</po-page-default>
+
+<app-page-slide-mobile #slideTurmaMobile>
+  <ng-container [ngTemplateOutlet]="incluTurmaTemplate"></ng-container>
+</app-page-slide-mobile>
+
+<ng-template #incluTurmaTemplate>
+  <form [formGroup]="formTurma">
+    <po-input
+      class="po-md-12"
+      name="descricao"
+      formControlName="descricao"
+      p-label="Descrição da Turma"
+      p-required="true"
+      p-show-required="true">
+    </po-input>
+    <po-input
+      class="po-md-6"
+      formControlName="ano"
+      name="ano"
+      p-label="Ano da turma"
+      p-pattern="^(19|20)\d{2}$"
+      p-error-pattern="Informe um ano válido"
+      [p-maxlength]="4"
+      p-required="true"
+      p-show-required="true">
+    </po-input>
+    <po-datepicker
+      class="po-md-6"
+      p-disabled="true"
+      formControlName="dataCriacao"
+      p-format="dd/mm/yyyy"
+      p-label="Data Criação">
+    </po-datepicker>
+    <po-combo
+      class="po-md-12"
+      formControlName="periodo"
+      name="periodo"
+      p-label="Período"
+      [p-options]="tiposPeriodos"
+      [p-required]="true"
+      p-show-required="true">
+    </po-combo>
+    <po-number
+      class="po-md-6"
+      p-label="Idade Inicial"
+      formControlName="idadeInicial"
+      name="idadeInicial"
+      p-required="true"
+      p-show-required="true"
+      p-clean>
+    </po-number>
+    <po-number
+      class="po-md-6"
+      p-label="Idade Final"
+      formControlName="idadeFinal"
+      name="idadeFinal"
+      p-required="true"
+      p-show-required="true"
+      p-clean>
+    </po-number>
+
+  </form>
+
+  <div class="po-row" [style.height.vh]="25"></div>
+
+  <div class="po-buttons-container">
+    <po-button
+      class="po-offset-lg-4 po-offset-xl-4 po-offset-xl-2 po-sm-12 po-md-6 po-lg-4 po-xl-4"
+      p-kind="secondary"
+      (p-click)="slideTurmaMobile.close()"
+      p-label="Cancelar">
+    </po-button>
+    <po-button
+      class="po-sm-12 po-md-6 po-lg-4 po-xl-4"
+      p-kind="primary"
+      (p-click)="salvaTurma()"
+      [p-disabled]="formTurma.invalid || formTurma.pending"
+      p-label="Confirmar">
+    </po-button>
+  </div>
+</ng-template>
+
+<po-loading-overlay *ngIf="loadingTurmas" [p-screen-lock]="true"></po-loading-overlay>

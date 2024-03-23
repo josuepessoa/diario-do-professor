@@ -1,0 +1,32 @@
+.page-slide-container {
+  z-index: 10;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  margin: 0px;
+  bottom: 0px;
+  right: 0px;
+  position: fixed;
+  width: 100%;
+  height: 90%;
+  background-color: #FFF;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+}
+
+.page-slide-close-button {
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  color: var(--color-brand-01-base);
+  cursor: pointer;
+  font-size: 24px;
+  position: absolute;
+  top: 21px;
+  right: 16px;
+  width: 24px;
+}
+
+.page-slide-text-header {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
+}

@@ -1,0 +1,15 @@
+# Node
+/back/node_modules
+/back/npm-debug.log
+/back/yarn-error.log
+/front/node_modules
+/front/npm-debug.log
+/front/yarn-error.log
+
+# Angular
+/front/.angular
+/front/.vscode
+
+#Configs db
+/back/serviceAccountKey.json
+
