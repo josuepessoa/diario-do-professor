@@ -8,14 +8,16 @@ class Turma {
     idadeInicial,
     idadeFinal,
     periodo,
-    dataCriacao
+    dataCriacao,
+    status
   }) {
     this.descricao = descricao;
     this.ano = ano;
     this.idadeInicial = idadeInicial;
     this.idadeFinal = idadeFinal;
-    this.periodo = periodo
+    this.periodo = periodo;
     this.dataCriacao = dataCriacao ;
+    this.status = status | 'ativo';
   }
 
   static async pegarTurmas() {
@@ -32,8 +34,19 @@ class Turma {
   }
 
   static async pegarPeloId(id) {
-    const resultado = await db.select('*').from('livros').where({ id });
-    return resultado[0];
+    const alunoRef = db.collection("turmas").doc(id);    
+    return alunoRef.get()
+      .then((doc) => {
+        if (doc.exists) {
+          return { ...doc.data(), id: doc.id };
+        } else {
+          return {message : "ID não encontrado"};
+        }
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar turma por ID:", error);
+        throw error;
+      });
   }
 
   async criar() {
