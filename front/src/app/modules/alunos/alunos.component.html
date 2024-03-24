@@ -1,5 +1,139 @@
-<po-page-default p-title="Home">
-  <p>alunos works!</p>
+<po-page-default p-title="Detalhes dos Alunos">
+  <div class="po-row po-mt-1 po-mb-1">
+    <po-button
+      class="po-mt-1 po-sm-12 po-md-6"
+      p-label="Incluir Aluno"
+      p-kind="primary"
+      p-icon="po-icon po-icon-plus"
+      (p-click)="incluiAluno()">
+    </po-button>
+    <po-input
+      class="po-sm-12 po-md-6"
+      name="search-aluno"
+      p-icon="po-icon-search"
+      p-placeholder="Pesquise pelo Aluno"
+      p-clean="true"
+      [formControl]="searchAlunoFormControl">
+    </po-input>
+  </div>
+  <ng-container *ngIf="alunos && alunos.length === 0">
+    <span class="po-font-text-bold po-text-center po-sm-12 po-mt-2 po-mb-2">Nenhum dado encontrado</span>
+  </ng-container>
+  <div *ngFor="let aluno of alunos;">
+    <po-widget
+      class="po-pt-1 po-pb-1 po-md-12"
+      p-primary-label="Alterar"
+      [p-title]="aluno.nome"
+      (p-primary-action)="modificarAluno(aluno)">
+      <div class="po-row">
+        <po-info
+          class="po-mb-1 po-sm-6 po-md-3"
+          p-label="Idade"
+          [p-value]="aluno.idade.toString()">
+        </po-info>
+        <po-info
+          class="po-mb-1 po-sm-6 po-md-3"
+          p-label="Sexo"
+          [p-value]="aluno.sexo">
+        </po-info>
+        <po-info
+          class="po-mb-1 po-sm-6 po-md-3"
+          p-label="Turma"
+          [p-value]="getInfoTurma(aluno.turma).descricao">
+        </po-info>
+        <po-tag
+          class="po-mb-1 po-sm-6 po-md-3"
+          p-label="Status"
+          [p-value]="getStatus(aluno.status).label"
+          [p-color]="getStatus(aluno.status).color">
+        </po-tag>
+      </div>
+    </po-widget>
+  </div>
 </po-page-default>
+
+<app-page-slide-mobile #slideAlunoMobile>
+  <ng-container [ngTemplateOutlet]="incluiAlunoTemplate"></ng-container>
+</app-page-slide-mobile>
+
+<ng-template #incluiAlunoTemplate>
+  <form [formGroup]="formAluno">
+    <po-input
+      class="po-md-12"
+      name="nome"
+      formControlName="nome"
+      p-label="Nome do Aluno"
+      p-required="true"
+      p-show-required="true">
+    </po-input>
+    <po-datepicker
+      class="po-md-6"
+      p-disabled="true"
+      formControlName="dataCriacao"
+      p-format="dd/mm/yyyy"
+      p-label="Data Criação">
+    </po-datepicker>
+    <po-combo
+      class="po-md-12"
+      formControlName="turma"
+      name="turma"
+      p-label="Turma"
+      [p-options]="getTurmasOptions()"
+      [p-required]="true"
+      [p-clean]="true"
+      p-show-required="true">
+    </po-combo>
+    <po-combo
+      class="po-md-12"
+      formControlName="sexo"
+      name="sexo"
+      p-label="Sexo"
+      [p-options]="sexoOptions"
+      [p-required]="true"
+      [p-clean]="true"
+      p-show-required="true">
+    </po-combo>
+    <po-number
+      class="po-md-6"
+      p-label="Idade"
+      formControlName="idade"
+      name="idade"
+      p-required="true"
+      p-show-required="true"
+      p-clean>
+    </po-number>
+    <po-combo
+      class="po-md-12"
+      formControlName="status"
+      name="status"
+      p-label="Status"
+      [p-options]="statusOptions"
+      [p-required]="true"
+      [p-clean]="true"
+      p-show-required="true">
+    </po-combo>
+
+  </form>
+
+  <div class="po-row" [style.height.vh]="25"></div>
+
+  <div class="po-buttons-container">
+    <po-button
+      class="po-offset-lg-4 po-offset-xl-4 po-offset-xl-2 po-sm-12 po-md-6 po-lg-4 po-xl-4"
+      p-kind="secondary"
+      (p-click)="slideAlunoMobile.close()"
+      p-label="Cancelar">
+    </po-button>
+    <po-button
+      class="po-sm-12 po-md-6 po-lg-4 po-xl-4"
+      p-kind="primary"
+      (p-click)="salvaAluno()"
+      [p-disabled]="formAluno.invalid || formAluno.pending"
+      p-label="Confirmar">
+    </po-button>
+  </div>
+</ng-template>
+
+<po-loading-overlay *ngIf="loadingAlunos" [p-screen-lock]="true"></po-loading-overlay>
 
 
