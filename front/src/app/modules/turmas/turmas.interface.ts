@@ -6,4 +6,5 @@ export interface TurmaInterface {
   descricao:string;
   dataCriacao : string;
   periodo: string;
+  status:string;
 }

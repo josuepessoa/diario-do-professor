@@ -111,7 +111,16 @@
       p-show-required="true"
       p-clean>
     </po-number>
-
+    <po-combo
+      class="po-md-12"
+      formControlName="status"
+      name="status"
+      p-label="Status"
+      [p-options]="statusOptions"
+      [p-required]="true"
+      [p-clean]="true"
+      p-show-required="true">
+    </po-combo>
   </form>
 
   <div class="po-row" [style.height.vh]="25"></div>

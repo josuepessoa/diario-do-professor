@@ -27,6 +27,7 @@ export class TurmasComponent implements OnInit {
     idadeFinal: new FormControl('', [Validators.required]),
     dataCriacao: new FormControl('', [Validators.required]),
     periodo: new FormControl('', [Validators.required]),
+    status: new FormControl('', [Validators.required]),
   });
 
   readonly periodos = [
@@ -38,6 +39,15 @@ export class TurmasComponent implements OnInit {
 
   readonly tiposPeriodos: Array<PoComboOption> = [
     ...this.periodos
+  ];
+
+  readonly status = [
+    { value: 'ativo', label: 'Ativo', color: 'color-09' },
+    { value: 'inativo', label: 'Inativo', color: 'color-08' },
+  ];
+
+  readonly statusOptions: Array<PoComboOption> = [
+    ...this.status
   ];
 
   @ViewChild('slideTurmaMobile') 'slideTurmaMobile': PageSlideMobileComponent;
@@ -75,7 +85,7 @@ export class TurmasComponent implements OnInit {
   }
 
   modificarTurma(turma : TurmaInterface){
-    console.log('turma',turma);
+    this.formTurma.reset();
     this.formTurma.patchValue(turma);
     this.slideTurmaMobile.open();
   }
@@ -85,7 +95,7 @@ export class TurmasComponent implements OnInit {
   }
 
   incluiTurma(){
-    console.log('incluir turma');
+    this.formTurma.reset();
     this.openSlide();
   }
 
@@ -99,6 +109,7 @@ export class TurmasComponent implements OnInit {
   }
 
   openSlide(){
+    this.formTurma.reset();
     this.formTurma.get('dataCriacao')?.setValue(new Date)
     this.slideTurmaMobile.open();
   }
@@ -142,7 +153,10 @@ export class TurmasComponent implements OnInit {
 
     }
 
+  }
 
+  getStatus(search:string) {
+    return this.status.filter((s) => s.value === search)[0];
   }
 
 }
