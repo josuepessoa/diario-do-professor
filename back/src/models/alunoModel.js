@@ -2,6 +2,7 @@ const db = require("../db/dbconfig.js");
 
 class Aluno {
   constructor({
+    id,
     nome,
     idade,
     sexo ,
@@ -9,12 +10,13 @@ class Aluno {
     status,
     dataCriacao,
   }) {
+    this.id = id;
     this.nome = nome;
     this.idade = idade;
     this.sexo = sexo;
     this.turma = turma;
     this.dataCriacao = dataCriacao ;
-    this.status = status | 'ativo';
+    this.status = status;
   }
 
   static async pegarAlunos() {
@@ -58,7 +60,6 @@ class Aluno {
     // verificar se o id existe no banco
     // se não existir é create
     // se existir é update
-
     if (this.id) {
       const resultado = await this.atualizar(this.id);
       return resultado;

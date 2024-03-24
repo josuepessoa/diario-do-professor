@@ -11,13 +11,14 @@ class Turma {
     dataCriacao,
     status
   }) {
+    this.id = id;
     this.descricao = descricao;
     this.ano = ano;
     this.idadeInicial = idadeInicial;
     this.idadeFinal = idadeFinal;
     this.periodo = periodo;
     this.dataCriacao = dataCriacao ;
-    this.status = status | 'ativo';
+    this.status = status;
   }
 
   static async pegarTurmas() {
