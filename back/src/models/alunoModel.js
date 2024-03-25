@@ -9,6 +9,7 @@ class Aluno {
     turma,
     status,
     dataCriacao,
+    avatar,
   }) {
     this.id = id;
     this.nome = nome;
@@ -17,6 +18,7 @@ class Aluno {
     this.turma = turma;
     this.dataCriacao = dataCriacao ;
     this.status = status;
+    this.avatar=avatar;
   }
 
   static async pegarAlunos() {
