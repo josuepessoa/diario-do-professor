@@ -23,30 +23,36 @@
     <po-widget
       class="po-pt-1 po-pb-1 po-md-12"
       p-primary-label="Alterar"
+      p-secondary-label="Incluir Anotações"
       [p-title]="aluno.nome"
-      (p-primary-action)="modificarAluno(aluno)">
+      (p-primary-action)="modificarAluno(aluno)"
+      (p-secondary-action)="modificarAluno(aluno)">
       <div class="po-row">
-        <po-info
-          class="po-mb-1 po-sm-6 po-md-3"
-          p-label="Idade"
-          [p-value]="aluno.idade.toString()">
-        </po-info>
-        <po-info
-          class="po-mb-1 po-sm-6 po-md-3"
-          p-label="Sexo"
-          [p-value]="aluno.sexo">
-        </po-info>
-        <po-info
-          class="po-mb-1 po-sm-6 po-md-3"
-          p-label="Turma"
-          [p-value]="getInfoTurma(aluno.turma).descricao">
-        </po-info>
-        <po-tag
-          class="po-mb-1 po-sm-6 po-md-3"
-          p-label="Status"
-          [p-value]="getStatus(aluno.status).label"
-          [p-color]="getStatus(aluno.status).color">
-        </po-tag>
+
+        <div class="po-sm-5">
+          <po-avatar class="po-text-center" p-size="lg" [p-src]="getAvatar(aluno.avatar)"> </po-avatar>
+        </div>
+        <div class="po-sm-7">
+          <po-info
+            class="po-mb-2"
+            p-label="Turma "
+            [p-orientation]="'horizontal'"
+            [p-value]="getInfoTurma(aluno.turma).descricao">
+          </po-info>
+          <po-tag
+            class="po-mb-2"
+            p-label="Status"
+            [p-orientation]="'horizontal'"
+            [p-value]="getStatus(aluno.status).label"
+            [p-color]="getStatus(aluno.status).color">
+          </po-tag>
+          <po-info
+            class="po-mb-2"
+            p-label="Idade"
+            [p-orientation]="'horizontal'"
+            [p-value]="aluno.idade.toString()">
+          </po-info>
+        </div>
       </div>
     </po-widget>
   </div>
@@ -108,6 +114,16 @@
       name="status"
       p-label="Status"
       [p-options]="statusOptions"
+      [p-required]="true"
+      [p-clean]="true"
+      p-show-required="true">
+    </po-combo>
+    <po-combo
+      class="po-md-12"
+      formControlName="avatar"
+      name="avatar"
+      p-label="Avatar"
+      [p-options]="formAluno.get('sexo').value === 'feminino'? avatarMeninaOptions : avatarMeninoOptions"
       [p-required]="true"
       [p-clean]="true"
       p-show-required="true">

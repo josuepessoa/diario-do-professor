@@ -30,6 +30,7 @@ export class AlunosComponent implements OnInit {
     turma: new FormControl('', [Validators.required]),
     dataCriacao: new FormControl('', [Validators.required]),
     status: new FormControl('', [Validators.required]),
+    avatar: new FormControl('', [Validators.required]),
   });
 
   readonly status = [
@@ -44,6 +45,20 @@ export class AlunosComponent implements OnInit {
   readonly sexoOptions : Array<PoComboOption> = [
     { value: 'masculino', label: 'Masculino'},
     { value: 'feminino', label: 'Feminino'},
+  ];
+
+  readonly avatarMeninoOptions : Array<PoComboOption> = [
+    { value: 'menino1', label: 'Avatar 1'},
+    { value: 'menino2', label: 'Avatar 2'},
+    { value: 'menino3', label: 'Avatar 3'},
+    { value: 'menino4', label: 'Avatar 4'},
+  ];
+
+  readonly avatarMeninaOptions : Array<PoComboOption> = [
+    { value: 'menina1', label: 'Avatar 1'},
+    { value: 'menina2', label: 'Avatar 2'},
+    { value: 'menina3', label: 'Avatar 3'},
+    { value: 'menina4', label: 'Avatar 4'},
   ];
 
   turmasOptions: Array<PoComboOption> = [ ];
@@ -75,8 +90,8 @@ export class AlunosComponent implements OnInit {
         this.turmas=turmas;
         this.turmas.forEach((t)=>{
           this.turmasOptions.push( {
-            value : t.id,
-            label : t.descricao
+            value : t?.id,
+            label : t?.descricao
           })
         })
       },
@@ -177,6 +192,10 @@ export class AlunosComponent implements OnInit {
 
   getInfoTurma(idTurma : string){
     return this.turmas.filter((t) => t.id === idTurma)[0];
+  }
+
+  getAvatar(avatar){
+    return `../../../assets/${avatar}.jpg`
   }
 
 }

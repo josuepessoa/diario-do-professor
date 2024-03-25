@@ -6,5 +6,6 @@ export interface AlunoInterface {
   dataCriacao : string;
   sexo: string;
   status: string;
+  avatar:string;
 }
 
