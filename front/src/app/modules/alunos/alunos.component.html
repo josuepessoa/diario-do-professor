@@ -22,11 +22,11 @@
   <div *ngFor="let aluno of alunos;">
     <po-widget
       class="po-pt-1 po-pb-1 po-md-12"
-      p-primary-label="Alterar"
-      p-secondary-label="Incluir Anotações"
+      p-primary-label="Editar Aluno"
+      p-secondary-label="Ver Anotações"
       [p-title]="aluno.nome"
       (p-primary-action)="modificarAluno(aluno)"
-      (p-secondary-action)="modificarAluno(aluno)">
+      (p-secondary-action)="anotacoesAluno(aluno)">
       <div class="po-row">
 
         <div class="po-sm-5">

@@ -1,0 +1,100 @@
+<po-page-default p-title="Anotações {{nomeAluno}} - {{turmaAluno}}">
+
+  <po-breadcrumb
+    [p-items]="[
+      { label: 'Alunos', link: '/alunos' },
+      { label: 'Anotações', link: '/anotacoes' }
+    ]"
+  >
+
+</po-breadcrumb>
+  <div class="po-row po-mt-1 po-mb-1">
+    <po-button
+      class="po-mt-1 po-sm-12 po-md-6"
+      p-label="Incluir Anotação"
+      p-kind="primary"
+      p-icon="po-icon po-icon-plus"
+      (p-click)="incluiAnotacao()">
+    </po-button>
+    <po-input
+      class="po-sm-12 po-md-6"
+      name="search-anotacao"
+      p-icon="po-icon-search"
+      p-placeholder="Pesquise pela anotação"
+      p-clean="true"
+      [formControl]="searchAnotacaoFormControl">
+    </po-input>
+  </div>
+  <ng-container *ngIf="anotacoes && anotacoes.length === 0">
+    <span class="po-font-text-bold po-text-center po-sm-12 po-mt-2 po-mb-2">Nenhum dado encontrado</span>
+  </ng-container>
+  <div *ngFor="let anotacao of anotacoes;">
+    <po-widget
+      class="po-pt-1 po-pb-1 po-md-12"
+      p-primary-label="Editar"
+      (p-primary-action)="modificarAnotacao(anotacao)">
+      <div class="po-row">
+        <div >
+          <po-info
+            class="po-sm-12"
+            p-label="Data de Criação"
+            [p-orientation]="'vertical'"
+            [p-value]="anotacao.dataCriacao">
+          </po-info>
+          <po-info
+            class="po-sm-12"
+            p-label="Descrição"
+            [p-orientation]="'vertical'"
+            [p-value]="truncarString(anotacao.descricao,300)">
+          </po-info>
+        </div>
+      </div>
+    </po-widget>
+  </div>
+</po-page-default>
+
+<app-page-slide-mobile #slideAnotacaoMobile>
+  <ng-container [ngTemplateOutlet]="anotacaoTemplate"></ng-container>
+</app-page-slide-mobile>
+
+<ng-template #anotacaoTemplate>
+  <form [formGroup]="formAnotacao">
+    <po-datepicker
+      class="po-md-12"
+      p-disabled="true"
+      formControlName="dataCriacao"
+      p-format="dd/mm/yyyy"
+      p-label="Data Criação">
+    </po-datepicker>
+    <po-textarea
+      class="po-md-12"
+      name="text"
+      formControlName="descricao"
+      p-label="Descrição"
+      p-rows="20">
+    </po-textarea>
+
+  </form>
+
+  <div class="po-row" [style.height.vh]="25"></div>
+
+  <div class="po-buttons-container">
+    <po-button
+      class="po-offset-lg-4 po-offset-xl-4 po-offset-xl-2 po-sm-12 po-md-6 po-lg-4 po-xl-4"
+      p-kind="secondary"
+      (p-click)="slideAnotacaoMobile.close()"
+      p-label="Cancelar">
+    </po-button>
+    <po-button
+      class="po-sm-12 po-md-6 po-lg-4 po-xl-4"
+      p-kind="primary"
+      (p-click)="salvaAnotacao()"
+      [p-disabled]="formAnotacao.invalid || formAnotacao.pending"
+      p-label="Confirmar">
+    </po-button>
+  </div>
+</ng-template>
+
+<po-loading-overlay *ngIf="loadingAnotacoes" [p-screen-lock]="true"></po-loading-overlay>
+
+

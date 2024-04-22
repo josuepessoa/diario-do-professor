@@ -21,6 +21,13 @@ const routes: Routes = [
         (m) => m.AlunosModule
       ),
   },
+  {
+    path: 'anotacoes',
+    loadChildren: () =>
+      import('./modules/anotacoes/anotacoes.module').then(
+        (m) => m.AnotacoesModule
+      ),
+  },
 ];
 
 @NgModule({

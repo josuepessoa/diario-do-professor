@@ -7,6 +7,7 @@ import { Observable, debounceTime, map } from 'rxjs';
 import { TurmasService } from '../turmas/turmas.service';
 import { PageSlideMobileComponent } from '../components/page-slide-mobile/page-slide-mobile.component';
 import { TurmaInterface } from '../turmas/turmas.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alunos',
@@ -69,6 +70,7 @@ export class AlunosComponent implements OnInit {
     private alunosService: AlunosService,
     private turmasService : TurmasService,
     private poNotification: PoNotificationService,
+    private router: Router,
     ) { }
 
   ngOnInit(): void {
@@ -196,6 +198,15 @@ export class AlunosComponent implements OnInit {
 
   getAvatar(avatar){
     return `../../../assets/${avatar}.jpg`
+  }
+
+  anotacoesAluno(aluno) {
+    this.router.navigate(['anotacoes', aluno.id], {
+      state: {
+        nomeAluno: aluno.nome,
+        turmaAluno: this.getInfoTurma(aluno.turma).descricao
+      }
+    });
   }
 
 }
