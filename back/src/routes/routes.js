@@ -1,6 +1,7 @@
 const express = require("express");
 const turmas = require("./turmasRoutes.js");
 const alunos = require("./alunosRoutes.js");
+const anotacoes = require("./anotacoesRoutes.js");
 
 const routes = (app) => {
   app.route('/').get((_, res) => {
@@ -11,6 +12,7 @@ const routes = (app) => {
     express.json(),
     turmas,
     alunos,
+    anotacoes
   );
 };
 
