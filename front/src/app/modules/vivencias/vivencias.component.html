@@ -1,0 +1,116 @@
+<po-page-default p-title="Vivencias">
+  <div class="po-row po-mt-1 po-mb-1">
+    <po-button
+      class="po-mt-1 po-sm-12 po-md-6"
+      p-label="Incluir Vivencia"
+      p-kind="primary"
+      p-icon="po-icon po-icon-plus"
+      (p-click)="incluiVivencia()">
+    </po-button>
+    <po-input
+      class="po-sm-12 po-md-6"
+      name="search-vivencia"
+      p-icon="po-icon-search"
+      p-placeholder="Pesquise pela vivencia"
+      p-clean="true"
+      [formControl]="searchVivenciaFormControl">
+    </po-input>
+  </div>
+  <ng-container *ngIf="vivencias && vivencias.length === 0">
+    <span class="po-font-text-bold po-text-center po-sm-12 po-mt-2 po-mb-2">Nenhum dado encontrado</span>
+  </ng-container>
+  <div *ngFor="let vivencia of vivencias;">
+    <po-widget
+      class="po-pt-1 po-pb-1 po-md-12"
+      p-primary-label="Editar"
+      (p-primary-action)="modificarVivencia(vivencia)">
+      <div class="po-row">
+        <div >
+          <po-info
+            class="po-sm-12"
+            p-label="Titulo"
+            [p-orientation]="'vertical'"
+            [p-value]="truncarString(vivencia.titulo,300)">
+          </po-info>
+          <po-info
+            class="po-sm-12"
+            p-label="Data de Criação"
+            [p-orientation]="'vertical'"
+            [p-value]="vivencia.dataCriacao">
+          </po-info>
+          <po-info
+            class="po-sm-12"
+            p-label="Categorias"
+            [p-orientation]="'vertical'"
+            [p-value]="vivencia.categorias">
+          </po-info>
+        </div>
+      </div>
+    </po-widget>
+  </div>
+</po-page-default>
+
+<app-page-slide-mobile #slideVivenciaMobile>
+  <ng-container [ngTemplateOutlet]="vivenciaTemplate"></ng-container>
+</app-page-slide-mobile>
+
+<ng-template #vivenciaTemplate>
+  <form [formGroup]="formVivencia">
+    <po-input
+      class="po-md-12"
+      name="titulo"
+      formControlName="titulo"
+      p-label="Título da vivência"
+      p-required="true"
+      p-show-required="true">
+    </po-input>
+    <po-input
+      class="po-md-12"
+      name="categorias"
+      formControlName="categorias"
+      p-label="Categorias da vivência"
+      p-required="true"
+      p-show-required="true">
+    </po-input>
+    <po-datepicker
+      class="po-md-12"
+      p-disabled="true"
+      formControlName="dataCriacao"
+      p-format="dd/mm/yyyy"
+      p-label="Data Criação">
+    </po-datepicker>
+    <po-rich-text
+      class="po-md-12"
+      name="text"
+      formControlName="descricao"
+      p-label="Descrição"
+      p-height="300">
+    </po-rich-text>
+
+  </form>
+
+  <div class="po-row" [style.height.vh]="25"></div>
+
+  <div class="po-buttons-container">
+    <po-button
+      class="po-offset-lg-4 po-offset-xl-4 po-offset-xl-2 po-sm-12 po-md-6 po-lg-4 po-xl-4"
+      p-kind="secondary"
+      (p-click)="slideVivenciaMobile.close()"
+      p-label="Cancelar">
+    </po-button>
+    <po-button
+      class="po-sm-12 po-md-6 po-lg-4 po-xl-4"
+      p-kind="primary"
+      (p-click)="salvaVivencia()"
+      [p-disabled]="formVivencia.invalid || formVivencia.pending"
+      p-label="Confirmar">
+    </po-button>
+  </div>
+</ng-template>
+
+<po-loading-overlay *ngIf="loadingVivencias" [p-screen-lock]="true"></po-loading-overlay>
+
+
+
+
+

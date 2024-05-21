@@ -30,6 +30,12 @@ export class AppComponent {
       icon: 'po-icon po-icon-users',
       shortLabel: 'Alunos',
     },
+    {
+      label: 'Vivencias',
+      link: '/vivencias',
+      icon: 'po-icon po-icon-light',
+      shortLabel: 'Vivencias',
+    },
   ];
 
 }

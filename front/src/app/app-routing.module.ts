@@ -28,6 +28,13 @@ const routes: Routes = [
         (m) => m.AnotacoesModule
       ),
   },
+  {
+    path: 'vivencias',
+    loadChildren: () =>
+      import('./modules/vivencias/vivencias.module').then(
+        (m) => m.VivenciasModule
+      ),
+  },
 ];
 
 @NgModule({
