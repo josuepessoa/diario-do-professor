@@ -141,5 +141,5 @@ export class AnotacoesComponent implements OnInit {
     } else {
         return str.substring(0, maxLength) + '...';
     }
-}
+  }
 }

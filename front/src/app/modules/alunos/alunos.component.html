@@ -37,14 +37,14 @@
             class="po-mb-2"
             p-label="Turma "
             [p-orientation]="'horizontal'"
-            [p-value]="getInfoTurma(aluno.turma).descricao">
+            [p-value]="getInfoTurma(aluno?.turma).descricao">
           </po-info>
           <po-tag
             class="po-mb-2"
             p-label="Status"
             [p-orientation]="'horizontal'"
-            [p-value]="getStatus(aluno.status).label"
-            [p-color]="getStatus(aluno.status).color">
+            [p-value]="getStatus(aluno?.status).label"
+            [p-color]="getStatus(aluno?.status).color">
           </po-tag>
           <po-info
             class="po-mb-2"
