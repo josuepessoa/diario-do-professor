@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import { PoModule } from '@po-ui/ng-components';
+import { PoModule ,PoDividerModule } from '@po-ui/ng-components';
 
 
 @NgModule({
@@ -14,6 +14,7 @@ import { PoModule } from '@po-ui/ng-components';
     CommonModule,
     HomeRoutingModule,
     PoModule,
+    PoDividerModule
   ]
 })
 export class HomeModule { }

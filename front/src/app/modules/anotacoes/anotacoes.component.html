@@ -1,6 +1,6 @@
-<po-page-default p-title="Anotações {{nomeAluno}} - {{turmaAluno}}">
+<po-page-default p-title="Anotações {{nomeAluno}} {{ turmaAluno ? ' - ' + turmaAluno : ''}}">
 
-  <po-breadcrumb
+  <po-breadcrumb *ngIf="idAluno"
     [p-items]="[
       { label: 'Alunos', link: '/alunos' },
       { label: 'Anotações', link: '/anotacoes' }
@@ -13,6 +13,7 @@
       p-label="Incluir Anotação"
       p-kind="primary"
       p-icon="po-icon po-icon-plus"
+      [p-disabled]="!idAluno"
       (p-click)="incluiAnotacao()">
     </po-button>
     <po-input
@@ -23,6 +24,12 @@
       p-clean="true"
       [formControl]="searchAnotacaoFormControl">
     </po-input>
+    <div *ngIf="!idAluno " class="po-sm-12">
+      <span class="po-mb-1 u-danger po-font-text-small">
+        Para incluir uma anotação, vincule a anotação a um aluno através do cadastro de alunos.
+      </span>
+    </div>
+
   </div>
   <ng-container *ngIf="anotacoes && anotacoes.length === 0">
     <span class="po-font-text-bold po-text-center po-sm-12 po-mt-2 po-mb-2">Nenhum dado encontrado</span>

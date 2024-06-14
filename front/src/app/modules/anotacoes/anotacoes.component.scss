@@ -1,3 +1,5 @@
+$u-danger: var(--color-danger);
+
 .po-buttons-container {
   position: absolute;
   bottom: 0;
@@ -21,4 +23,24 @@
   bottom: 0;
   padding: 1rem 2vw;
   width: 100vw;
+}
+
+.u-danger {
+  color: $u-danger;
+}
+
+.u-icon {
+  color: var(--color-brand-01-base);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.u-label-projeto {
+  font-family: var(--font-family);
+  font-size: 16px;
+  height: var(--line-height);
+  color: var(--color-field-container-color-title, var(--text-color));
+  text-align: left;
+  font-weight: bold;
+  padding-right: var(--spacing-xs);
 }

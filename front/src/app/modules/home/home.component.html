@@ -1,5 +1,95 @@
-<po-page-default p-title="Home">
-  <div>
-    home
+<po-page-default [p-title]="'Bem vindo, Professor'">
+  <div class="po-font-text-large">
+    <div class="po-row">
+      <po-widget
+        class="po-sm-12 po-md-6 po-mb-3"
+        p-title="Dados de Turmas"
+        (p-primary-action)="actionTurmas()"
+        p-primary-label="Exibir">
+        <div class="po-row">
+          <div class="po-sm-5">
+            <po-avatar class="po-text-center" p-size="lg" p-src="../../../assets/turma.jpg"> </po-avatar>
+          </div>
+          <div class="po-sm-7">
+            <po-info
+              p-label="Turmas Ativas"
+              p-orientation="horizontal"
+              p-value="{{dadosDashboard?.turmas?.ativos}}" >
+            </po-info>
+            <po-info
+              p-label="Turmas Inativas"
+              p-orientation="horizontal"
+              p-value="{{dadosDashboard?.turmas?.inativos}}" >
+            </po-info>
+          </div>
+        </div>
+      </po-widget>
+      <po-widget
+        class="po-sm-12 po-md-6 po-mb-3"
+        p-title="Dados de Alunos"
+        (p-primary-action)="actionAlunos()"
+        p-primary-label="Exibir">
+        <div class="po-row">
+          <div class="po-sm-5">
+            <po-avatar class="po-text-center" p-size="lg" p-src="../../../assets/aluno.jpg"> </po-avatar>
+          </div>
+          <div class="po-sm-5">
+            <po-info
+              p-label="Alunos Ativos"
+              p-orientation="horizontal"
+              p-value="{{dadosDashboard?.alunos?.ativos}}" >
+            </po-info>
+            <po-info
+              p-label="Alunos Inativos"
+              p-orientation="horizontal"
+              p-value="{{dadosDashboard?.alunos?.inativos}}" >
+            </po-info>
+          </div>
+        </div>
+      </po-widget>
+      <po-widget
+        class="po-sm-12 po-md-6 po-mb-3"
+        p-title="Dados de Vivências"
+        (p-primary-action)="actionVivencias()"
+        p-primary-label="Exibir">
+        <div class="po-sm-5">
+          <po-avatar class="po-text-center" p-size="lg" p-src="../../../assets/vivencia.jpg"> </po-avatar>
+        </div>
+        <div class="po-sm-7">
+          <po-info
+            p-label="Ultimos 30 dias"
+            p-orientation="horizontal"
+            p-value="{{dadosDashboard?.vivencias?.ultimoMes}}" >
+          </po-info>
+          <po-info
+            p-label="Todas as Vivências"
+            p-orientation="horizontal"
+            p-value="{{dadosDashboard?.vivencias?.total}}" >
+          </po-info>
+        </div>
+      </po-widget>
+      <po-widget
+        class="po-sm-12 po-md-6 po-mb-3"
+        p-title="Dados de Anotações"
+        (p-primary-action)="actionAnotacoes()"
+        p-primary-label="Exibir">
+        <div class="po-sm-5">
+          <po-avatar class="po-text-center" p-size="lg" p-src="../../../assets/anotacao.jpg"> </po-avatar>
+        </div>
+        <div class="po-sm-7">
+        </div>
+        <po-info
+          p-label="Ultimos 30 dias"
+          p-orientation="horizontal"
+          p-value="{{dadosDashboard?.anotacoes?.ultimoMes}}" >
+        </po-info>
+        <po-info
+          p-label="Todas as Anotações"
+          p-orientation="horizontal"
+          p-value="{{dadosDashboard?.anotacoes?.total}}" >
+        </po-info>
+      </po-widget>
+    </div>
+
   </div>
 </po-page-default>

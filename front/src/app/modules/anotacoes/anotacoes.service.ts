@@ -13,7 +13,8 @@ export class AnotacoesService {
   constructor( private http : HttpClient) { }
 
   getAnotacoes(idAluno =''){
-    return this.http.get(`${urlBackEnd}anotacoes?idAluno=${idAluno}`);
+    const aluno = idAluno ? `?idAluno=${idAluno}` : ''
+    return this.http.get(`${urlBackEnd}anotacoes${aluno}`);
   }
 
   incluiAnotacao(body : AnotacaoInterface){

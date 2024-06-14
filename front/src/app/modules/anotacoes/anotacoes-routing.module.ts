@@ -11,6 +11,10 @@ const routes: Routes = [
     path: 'anotacoes/:id',
     component: AnotacoesComponent
   },
+  {
+    path: '',
+    component: AnotacoesComponent
+  },
 ]
 
 @NgModule({
