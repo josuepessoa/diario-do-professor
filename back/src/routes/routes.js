@@ -3,6 +3,7 @@ const turmas = require("./turmasRoutes.js");
 const alunos = require("./alunosRoutes.js");
 const anotacoes = require("./anotacoesRoutes.js");
 const vivencias = require("./vivenciasRoutes.js");
+const dashboard = require("./dashboardRoutes.js");
 
 const routes = (app) => {
   app.route('/').get((_, res) => {
@@ -14,7 +15,8 @@ const routes = (app) => {
     turmas,
     alunos,
     anotacoes,
-    vivencias
+    vivencias,
+    dashboard,
   );
 };
 
